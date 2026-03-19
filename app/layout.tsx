@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     "Track adoption metrics for Twin Finance LATAM stablecoins: ARGt, BRAt, COLt, PERt, MEXt on Base",
   icons: {
-    icon: "/favicon.svg",
+    icon: { url: "/favicon.svg", type: "image/svg+xml" },
   },
 }
 
