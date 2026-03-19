@@ -67,7 +67,7 @@ function Header() {
   return (
     <div className="flex items-center justify-between border-b border-border pb-6">
       <div className="flex items-center gap-3">
-        <TwinLogo size={44} />
+        <TwinLogo size={52} />
         <div>
           <h1 className="font-serif text-xl font-medium tracking-tight text-foreground">
             Twin Finance
