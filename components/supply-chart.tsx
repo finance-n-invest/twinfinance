@@ -30,7 +30,7 @@ export function SupplyChart({ data, selectedToken }: SupplyChartProps) {
     ? [selectedToken]
     : TOKEN_SYMBOLS
 
-  // Pivot data: { date, ARGt, BRAt, COLt, PERt }
+  // Pivot data: { date, ARGt, BRAt, COLt, PERt, MEXt }
   const dateMap = new Map<string, Record<string, number>>()
   for (const row of data) {
     if (selectedToken && row.symbol !== selectedToken) continue
@@ -57,32 +57,34 @@ export function SupplyChart({ data, selectedToken }: SupplyChartProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-base">Supply Over Time</CardTitle>
+        <CardTitle className="font-serif text-base font-normal">Supply Over Time</CardTitle>
       </CardHeader>
       <CardContent>
         <ResponsiveContainer width="100%" height={300}>
           <AreaChart data={chartData}>
-            <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
             <XAxis
               dataKey="date"
-              tick={{ fontSize: 12 }}
-              stroke="hsl(var(--muted-foreground))"
+              tick={{ fontSize: 11, fontFamily: "var(--font-mono)" }}
+              stroke="#666666"
             />
             <YAxis
               tickFormatter={formatNumber}
-              tick={{ fontSize: 12 }}
-              stroke="hsl(var(--muted-foreground))"
+              tick={{ fontSize: 11, fontFamily: "var(--font-mono)" }}
+              stroke="#666666"
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: "hsl(var(--card))",
-                border: "1px solid hsl(var(--border))",
+                backgroundColor: "#121212",
+                border: "1px solid rgba(255,255,255,0.08)",
                 borderRadius: "8px",
-                color: "hsl(var(--card-foreground))",
+                color: "#e5e5e5",
+                fontFamily: "var(--font-mono)",
+                fontSize: "12px",
               }}
               formatter={(value) => formatNumber(Number(value))}
             />
-            <Legend />
+            <Legend wrapperStyle={{ fontSize: "12px" }} />
             {tokens.map((sym) => (
               <Area
                 key={sym}
@@ -91,7 +93,7 @@ export function SupplyChart({ data, selectedToken }: SupplyChartProps) {
                 stackId="1"
                 stroke={TOKENS[sym as keyof typeof TOKENS].color}
                 fill={TOKENS[sym as keyof typeof TOKENS].color}
-                fillOpacity={0.3}
+                fillOpacity={0.2}
               />
             ))}
           </AreaChart>

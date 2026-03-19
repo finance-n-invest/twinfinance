@@ -59,12 +59,12 @@ export function Dashboard({
         onValueChange={(v) => setSelectedToken(v === "all" ? null : v)}
       >
         <TabsList>
-          <TabsTrigger value="all">All Tokens</TabsTrigger>
+          <TabsTrigger value="all" className="text-xs tracking-wide">
+            All Tokens
+          </TabsTrigger>
           {TOKEN_SYMBOLS.map((sym) => (
-            <TabsTrigger key={sym} value={sym}>
-              <span className="mr-1">
-                {TOKENS[sym].flag}
-              </span>
+            <TabsTrigger key={sym} value={sym} className="text-xs tracking-wide">
+              <span className="mr-1.5">{TOKENS[sym].flag}</span>
               {sym}
             </TabsTrigger>
           ))}

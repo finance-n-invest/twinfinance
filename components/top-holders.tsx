@@ -33,24 +33,24 @@ export function TopHolders({ data, selectedToken }: TopHoldersProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-base">
-          Top Holders{selectedToken ? ` - ${selectedToken}` : ""}
+        <CardTitle className="font-serif text-base font-normal">
+          Top Holders{selectedToken ? ` \u2014 ${selectedToken}` : ""}
         </CardTitle>
       </CardHeader>
       <CardContent>
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-12">#</TableHead>
-              {!selectedToken && <TableHead>Token</TableHead>}
-              <TableHead>Address</TableHead>
-              <TableHead className="text-right">Balance</TableHead>
+              <TableHead className="w-12 text-xs uppercase tracking-wide">#</TableHead>
+              {!selectedToken && <TableHead className="text-xs uppercase tracking-wide">Token</TableHead>}
+              <TableHead className="text-xs uppercase tracking-wide">Address</TableHead>
+              <TableHead className="text-right text-xs uppercase tracking-wide">Balance</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {filtered.map((row) => (
               <TableRow key={`${row.symbol}-${row.holder}`}>
-                <TableCell className="font-medium">{row.rank}</TableCell>
+                <TableCell className="font-mono text-muted-foreground">{row.rank}</TableCell>
                 {!selectedToken && (
                   <TableCell>
                     <Badge
@@ -71,7 +71,7 @@ export function TopHolders({ data, selectedToken }: TopHoldersProps) {
                     href={`${BASESCAN_ADDRESS_URL}/${row.holder}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-400 hover:underline font-mono text-sm"
+                    className="text-[#ff6602] hover:underline font-mono text-sm"
                   >
                     {truncateAddress(row.holder)}
                   </a>

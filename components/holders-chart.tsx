@@ -52,30 +52,32 @@ export function HoldersChart({ data, selectedToken }: HoldersChartProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-base">Holders Growth</CardTitle>
+        <CardTitle className="font-serif text-base font-normal">Holders Growth</CardTitle>
       </CardHeader>
       <CardContent>
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={chartData}>
-            <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
             <XAxis
               dataKey="date"
-              tick={{ fontSize: 12 }}
-              stroke="hsl(var(--muted-foreground))"
+              tick={{ fontSize: 11, fontFamily: "var(--font-mono)" }}
+              stroke="#666666"
             />
             <YAxis
-              tick={{ fontSize: 12 }}
-              stroke="hsl(var(--muted-foreground))"
+              tick={{ fontSize: 11, fontFamily: "var(--font-mono)" }}
+              stroke="#666666"
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: "hsl(var(--card))",
-                border: "1px solid hsl(var(--border))",
+                backgroundColor: "#121212",
+                border: "1px solid rgba(255,255,255,0.08)",
                 borderRadius: "8px",
-                color: "hsl(var(--card-foreground))",
+                color: "#e5e5e5",
+                fontFamily: "var(--font-mono)",
+                fontSize: "12px",
               }}
             />
-            <Legend />
+            <Legend wrapperStyle={{ fontSize: "12px" }} />
             {tokens.map((sym) => (
               <Line
                 key={sym}
