@@ -2,6 +2,7 @@ import { getLatestResults } from "@/lib/dune"
 import { DUNE_QUERIES } from "@/lib/constants"
 import { Dashboard } from "@/components/dashboard"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { TwinLogo } from "@/components/twin-logo"
 
 // Force server-side rendering on every request (with ISR caching on fetches).
 // This prevents the page from being statically generated at build time,
@@ -62,13 +63,7 @@ function Header() {
   return (
     <div className="flex items-center justify-between border-b border-border pb-6">
       <div className="flex items-center gap-3">
-        {/* Twin logo icon */}
-        <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="1" y="1" width="30" height="30" rx="4" stroke="currentColor" strokeWidth="1.5" className="text-muted-foreground"/>
-          <path d="M8 12h16M8 20h16M12 8v16M20 8v16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" className="text-muted-foreground"/>
-          <circle cx="16" cy="16" r="5" stroke="#ff6602" strokeWidth="1.5"/>
-          <path d="M13 16h6M16 13v6" stroke="#ff6602" strokeWidth="1.2" strokeLinecap="round"/>
-        </svg>
+        <TwinLogo size={28} />
         <div>
           <h1 className="font-serif text-xl font-medium tracking-tight text-foreground">
             Twin Finance
