@@ -12,7 +12,7 @@ export const TOKENS = {
     name: "Argentine Peso",
     currency: "ARS",
     contract: "0xf016413834e6d1a14f3d628b11d6ef725a6bdbdd",
-    color: "#3b82f6", // blue
+    color: "#75AADB", // celeste argentino
     flag: "\u{1F1E6}\u{1F1F7}",
     hidden: false,
   },
@@ -21,7 +21,7 @@ export const TOKENS = {
     name: "Brazilian Real",
     currency: "BRL",
     contract: "0xfee29845569570f8e0119291dff77b7b93283aab",
-    color: "#22c55e", // green
+    color: "#009739", // verde brasileiro
     flag: "\u{1F1E7}\u{1F1F7}",
     hidden: false,
   },
@@ -30,7 +30,7 @@ export const TOKENS = {
     name: "Colombian Peso",
     currency: "COP",
     contract: "0xd70ad085684b2a9f4b5d54d7bdb2eca37a273216",
-    color: "#eab308", // yellow
+    color: "#FCD116", // amarillo colombiano
     flag: "\u{1F1E8}\u{1F1F4}",
     hidden: false,
   },
@@ -39,7 +39,7 @@ export const TOKENS = {
     name: "Peruvian Sol",
     currency: "PEN",
     contract: "0xd09aba2969b822d66dc4bc3bb58ee520bcf9f0c3",
-    color: "#ef4444", // red
+    color: "#D91023", // rojo peruano
     flag: "\u{1F1F5}\u{1F1EA}",
     hidden: false,
   },
@@ -48,7 +48,7 @@ export const TOKENS = {
     name: "Mexican Peso",
     currency: "MXN",
     contract: "0x59863989d080b22476db95656d0c3cc18be92214",
-    color: "#f97316", // orange
+    color: "#006847", // verde mexicano
     flag: "\u{1F1F2}\u{1F1FD}",
     hidden: true, // hidden until minting begins
   },
