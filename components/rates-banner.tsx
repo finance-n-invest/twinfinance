@@ -28,15 +28,21 @@ export function RatesBanner({ rates }: RatesBannerProps) {
       <span className="font-medium text-muted-foreground uppercase tracking-wide">
         Belo Rates
       </span>
-      {allCurrencies.map((currency) => {
-        const entry = rates[currency]
-        const hasRate = entry?.rate != null
-        return (
-          <span key={currency} className={`font-mono ${hasRate ? "text-foreground" : "text-muted-foreground"}`}>
-            1 USD = {hasRate ? formatRate(entry.rate!) : "—"} {currency}
-          </span>
-        )
-      })}
+      <span className="font-mono text-foreground">
+        1 USD
+        {allCurrencies.map((currency) => {
+          const entry = rates[currency]
+          const hasRate = entry?.rate != null
+          return (
+            <span key={currency}>
+              {" = "}
+              <span className={hasRate ? "text-foreground" : "text-muted-foreground"}>
+                {hasRate ? formatRate(entry.rate!) : "—"} {currency}
+              </span>
+            </span>
+          )
+        })}
+      </span>
       <a
         href="https://criptoya.com"
         target="_blank"
