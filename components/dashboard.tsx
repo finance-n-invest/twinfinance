@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { TOKEN_SYMBOLS, TOKENS } from "@/lib/constants"
+import type { Rates } from "@/lib/rates"
 import { KpiCards } from "@/components/kpi-cards"
 import { SupplyChart } from "@/components/supply-chart"
 import { HoldersChart } from "@/components/holders-chart"
@@ -41,6 +42,7 @@ interface DashboardProps {
     balance: number
     rank: number
   }>
+  rates: Rates
 }
 
 export function Dashboard({
@@ -49,6 +51,7 @@ export function Dashboard({
   holders,
   activity,
   topHolders,
+  rates,
 }: DashboardProps) {
   const [selectedToken, setSelectedToken] = useState<string | null>(null)
 
@@ -70,10 +73,10 @@ export function Dashboard({
         </TabsList>
       </Tabs>
 
-      <KpiCards data={snapshot} selectedToken={selectedToken} />
+      <KpiCards data={snapshot} selectedToken={selectedToken} rates={rates} />
 
       <div className="grid gap-4 md:grid-cols-2">
-        <SupplyChart data={supply} selectedToken={selectedToken} />
+        <SupplyChart data={supply} selectedToken={selectedToken} rates={rates} />
         <HoldersChart data={holders} selectedToken={selectedToken} />
       </div>
 
@@ -82,15 +85,17 @@ export function Dashboard({
           data={activity}
           selectedToken={selectedToken}
           metric="num_transfers"
+          rates={rates}
         />
         <ActivityChart
           data={activity}
           selectedToken={selectedToken}
           metric="transfer_volume"
+          rates={rates}
         />
       </div>
 
-      <TopHolders data={topHolders} selectedToken={selectedToken} />
+      <TopHolders data={topHolders} selectedToken={selectedToken} rates={rates} />
     </div>
   )
 }

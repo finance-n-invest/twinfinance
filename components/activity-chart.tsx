@@ -13,8 +13,10 @@ import {
 import { useTheme } from "next-themes"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { TOKENS, TOKEN_SYMBOLS } from "@/lib/constants"
-import { formatNumber } from "@/lib/format"
+import { formatNumber, formatWithCurrency, formatUsd } from "@/lib/format"
 import { chartTheme } from "@/lib/chart-theme"
+import type { Rates } from "@/lib/rates"
+import { toUsd } from "@/lib/rates"
 
 interface ActivityRow {
   block_date: string
@@ -29,19 +31,21 @@ interface ActivityChartProps {
   data: ActivityRow[]
   selectedToken: string | null
   metric: "num_transfers" | "transfer_volume"
+  rates: Rates
 }
 
 export function ActivityChart({
   data,
   selectedToken,
   metric,
+  rates,
 }: ActivityChartProps) {
   const { resolvedTheme } = useTheme()
   const colors = chartTheme[resolvedTheme === "dark" ? "dark" : "light"]
 
   const tokens = selectedToken ? [selectedToken] : TOKEN_SYMBOLS
-  const title =
-    metric === "num_transfers" ? "Daily Transfers" : "Daily Transfer Volume"
+  const isVolume = metric === "transfer_volume"
+  const title = isVolume ? "Daily Transfer Volume" : "Daily Transfers"
 
   const dateMap = new Map<string, Record<string, number>>()
   for (const row of data) {
@@ -59,6 +63,19 @@ export function ActivityChart({
     }
     return { date, ...entry }
   })
+
+  // For volume metric, show currency context in tooltip
+  const tooltipFormatter = (value: number | string | (number | string)[], name: string) => {
+    const num = Number(value)
+    if (!isVolume) return [formatNumber(num), name]
+    const token = TOKENS[name as keyof typeof TOKENS]
+    if (!token) return [formatNumber(num), name]
+    const label = `${name} (${token.currency})`
+    const formatted = formatWithCurrency(num, token.currency)
+    const usd = toUsd(num, token.currency, rates)
+    const display = usd != null ? `${formatted} (${formatUsd(usd)})` : formatted
+    return [display, label]
+  }
 
   return (
     <Card>
@@ -88,9 +105,16 @@ export function ActivityChart({
                 fontFamily: "var(--font-mono)",
                 fontSize: "12px",
               }}
-              formatter={(value) => formatNumber(Number(value))}
+              formatter={tooltipFormatter as never}
             />
-            <Legend wrapperStyle={{ fontSize: "12px" }} />
+            <Legend
+              wrapperStyle={{ fontSize: "12px" }}
+              formatter={(value) => {
+                if (!isVolume) return value
+                const token = TOKENS[value as keyof typeof TOKENS]
+                return token ? `${value} (${token.currency})` : value
+              }}
+            />
             {tokens.map((sym) => (
               <Bar
                 key={sym}

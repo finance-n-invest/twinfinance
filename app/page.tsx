@@ -3,6 +3,7 @@ import { DUNE_QUERIES } from "@/lib/constants"
 import { Dashboard } from "@/components/dashboard"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { TwinLogo } from "@/components/twin-logo"
+import { fetchRates } from "@/lib/rates"
 
 // Force server-side rendering on every request (with ISR caching on fetches).
 // This prevents the page from being statically generated at build time,
@@ -22,8 +23,9 @@ async function fetchDuneData() {
 
 export default async function Home() {
   let data
+  let rates = { ARS: null, BRL: null, COP: null, PEN: null, MXN: null } as Record<string, number | null>
   try {
-    data = await fetchDuneData()
+    ;[data, rates] = await Promise.all([fetchDuneData(), fetchRates()])
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err)
     return (
@@ -53,6 +55,7 @@ export default async function Home() {
           holders={data.holders.rows as never[]}
           activity={data.activity.rows as never[]}
           topHolders={data.topHolders.rows as never[]}
+          rates={rates}
         />
       </div>
       <Footer />

@@ -13,8 +13,10 @@ import {
 import { useTheme } from "next-themes"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { TOKENS, TOKEN_SYMBOLS } from "@/lib/constants"
-import { formatNumber } from "@/lib/format"
+import { formatNumber, formatWithCurrency, formatUsd } from "@/lib/format"
 import { chartTheme } from "@/lib/chart-theme"
+import type { Rates } from "@/lib/rates"
+import { toUsd } from "@/lib/rates"
 
 interface SupplyRow {
   block_date: string
@@ -25,9 +27,10 @@ interface SupplyRow {
 interface SupplyChartProps {
   data: SupplyRow[]
   selectedToken: string | null
+  rates: Rates
 }
 
-export function SupplyChart({ data, selectedToken }: SupplyChartProps) {
+export function SupplyChart({ data, selectedToken, rates }: SupplyChartProps) {
   const { resolvedTheme } = useTheme()
   const colors = chartTheme[resolvedTheme === "dark" ? "dark" : "light"]
 
@@ -54,6 +57,18 @@ export function SupplyChart({ data, selectedToken }: SupplyChartProps) {
     }
     return { date, ...entry }
   })
+
+  // Custom tooltip formatter with currency
+  const tooltipFormatter = (value: number | string | (number | string)[], name: string) => {
+    const num = Number(value)
+    const token = TOKENS[name as keyof typeof TOKENS]
+    if (!token) return [formatNumber(num), name]
+    const label = `${name} (${token.currency})`
+    const formatted = formatWithCurrency(num, token.currency)
+    const usd = toUsd(num, token.currency, rates)
+    const display = usd != null ? `${formatted} (${formatUsd(usd)})` : formatted
+    return [display, label]
+  }
 
   return (
     <Card>
@@ -83,9 +98,15 @@ export function SupplyChart({ data, selectedToken }: SupplyChartProps) {
                 fontFamily: "var(--font-mono)",
                 fontSize: "12px",
               }}
-              formatter={(value) => formatNumber(Number(value))}
+              formatter={tooltipFormatter as never}
             />
-            <Legend wrapperStyle={{ fontSize: "12px" }} />
+            <Legend
+              wrapperStyle={{ fontSize: "12px" }}
+              formatter={(value) => {
+                const token = TOKENS[value as keyof typeof TOKENS]
+                return token ? `${value} (${token.currency})` : value
+              }}
+            />
             {tokens.map((sym) => (
               <Area
                 key={sym}
