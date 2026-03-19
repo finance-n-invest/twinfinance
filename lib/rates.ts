@@ -1,6 +1,6 @@
 /**
- * Fetch USD exchange rates from CriptoYa (Belo).
- * Currently available: ARS, BRL. Others return null.
+ * Fetch USD exchange rates from CriptoYa.
+ * ARS, BRL via Belo. COP, PEN via Binance P2P.
  * Rate = local currency units per 1 USDT.
  * To convert: usd_value = local_amount / rate
  */
@@ -12,9 +12,11 @@ export interface RateEntry {
 
 export type Rates = Record<string, RateEntry>
 
-const BELO_PAIRS: { currency: string; url: string }[] = [
+const RATE_SOURCES: { currency: string; url: string }[] = [
   { currency: "ARS", url: "https://criptoya.com/api/belo/USDT/ARS/0.1" },
   { currency: "BRL", url: "https://criptoya.com/api/belo/USDT/BRL/0.1" },
+  { currency: "COP", url: "https://criptoya.com/api/binancep2p/USDT/COP/0.1" },
+  { currency: "PEN", url: "https://criptoya.com/api/binancep2p/USDT/PEN/0.1" },
 ]
 
 async function fetchRate(url: string): Promise<{ rate: number | null; time: number | null }> {
@@ -32,7 +34,7 @@ async function fetchRate(url: string): Promise<{ rate: number | null; time: numb
 
 export async function fetchRates(): Promise<Rates> {
   const results = await Promise.all(
-    BELO_PAIRS.map(async ({ currency, url }) => ({
+    RATE_SOURCES.map(async ({ currency, url }) => ({
       currency,
       ...(await fetchRate(url)),
     }))

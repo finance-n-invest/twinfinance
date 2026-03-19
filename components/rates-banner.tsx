@@ -17,7 +17,7 @@ function formatRate(rate: number): string {
 
 export function RatesBanner({ rates: initialRates }: RatesBannerProps) {
   const [rates, setRates] = useState<Rates>(initialRates)
-  const allCurrencies = ["ARS", "BRL", "COP", "MXN", "PEN"]
+  const allCurrencies = ["ARS", "BRL", "COP", "PEN"]
 
   useEffect(() => {
     const poll = async () => {
@@ -36,7 +36,7 @@ export function RatesBanner({ rates: initialRates }: RatesBannerProps) {
   return (
     <div className="flex flex-wrap items-center gap-x-3 gap-y-1 rounded-md border border-border px-3 py-1.5 text-sm">
       <span className="font-medium text-muted-foreground uppercase tracking-wide">
-        Belo Rates
+        Rates
       </span>
       <span className="font-mono text-foreground">
         1 USD

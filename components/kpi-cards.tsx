@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Coins, Users, ArrowRightLeft, TrendingUp } from "lucide-react"
 import { formatNumber, formatWithCurrency, formatUsd } from "@/lib/format"
-import { TOKENS } from "@/lib/constants"
+import { TOKENS, TOKEN_SYMBOLS } from "@/lib/constants"
 import type { Rates } from "@/lib/rates"
 import { toUsd } from "@/lib/rates"
 
@@ -26,9 +26,10 @@ function getCurrency(symbol: string): string {
 }
 
 export function KpiCards({ data, selectedToken, rates }: KpiCardsProps) {
+  const visibleSymbols = TOKEN_SYMBOLS as readonly string[]
   const filtered = selectedToken
     ? data.filter((r) => r.symbol === selectedToken)
-    : data
+    : data.filter((r) => visibleSymbols.includes(r.symbol))
 
   const totalHolders = filtered.reduce((s, r) => s + r.active_holders, 0)
   const totalTransfers = filtered.reduce((s, r) => s + r.total_transfers, 0)
@@ -96,7 +97,7 @@ export function KpiCards({ data, selectedToken, rates }: KpiCardsProps) {
       icon: Coins,
     },
     {
-      title: "Active Holders",
+      title: "Total Holders",
       value: formatNumber(totalHolders),
       subtext: null,
       icon: Users,

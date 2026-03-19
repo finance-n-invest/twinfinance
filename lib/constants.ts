@@ -13,7 +13,8 @@ export const TOKENS = {
     currency: "ARS",
     contract: "0xf016413834e6d1a14f3d628b11d6ef725a6bdbdd",
     color: "#3b82f6", // blue
-    flag: "🇦🇷",
+    flag: "\u{1F1E6}\u{1F1F7}",
+    hidden: false,
   },
   BRAt: {
     symbol: "BRAt",
@@ -21,7 +22,8 @@ export const TOKENS = {
     currency: "BRL",
     contract: "0xfee29845569570f8e0119291dff77b7b93283aab",
     color: "#22c55e", // green
-    flag: "🇧🇷",
+    flag: "\u{1F1E7}\u{1F1F7}",
+    hidden: false,
   },
   COLt: {
     symbol: "COLt",
@@ -29,7 +31,8 @@ export const TOKENS = {
     currency: "COP",
     contract: "0xd70ad085684b2a9f4b5d54d7bdb2eca37a273216",
     color: "#eab308", // yellow
-    flag: "🇨🇴",
+    flag: "\u{1F1E8}\u{1F1F4}",
+    hidden: false,
   },
   PERt: {
     symbol: "PERt",
@@ -37,7 +40,8 @@ export const TOKENS = {
     currency: "PEN",
     contract: "0xd09aba2969b822d66dc4bc3bb58ee520bcf9f0c3",
     color: "#ef4444", // red
-    flag: "🇵🇪",
+    flag: "\u{1F1F5}\u{1F1EA}",
+    hidden: false,
   },
   MEXt: {
     symbol: "MEXt",
@@ -45,13 +49,20 @@ export const TOKENS = {
     currency: "MXN",
     contract: "0x59863989d080b22476db95656d0c3cc18be92214",
     color: "#f97316", // orange
-    flag: "🇲🇽",
+    flag: "\u{1F1F2}\u{1F1FD}",
+    hidden: true, // hidden until minting begins
   },
 } as const
 
 export type TokenSymbol = keyof typeof TOKENS
 
-export const TOKEN_SYMBOLS = Object.keys(TOKENS) as TokenSymbol[]
+/** Only tokens visible in the dashboard UI */
+export const TOKEN_SYMBOLS = (Object.keys(TOKENS) as TokenSymbol[]).filter(
+  (sym) => !TOKENS[sym].hidden
+)
+
+/** All token contracts including hidden (for Dune queries) */
+export const ALL_TOKEN_SYMBOLS = Object.keys(TOKENS) as TokenSymbol[]
 
 /** All Base chain token contract addresses (lowercase) for Dune SQL IN clauses */
 export const BASE_TOKEN_CONTRACTS = Object.values(TOKENS).map(
