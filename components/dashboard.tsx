@@ -9,6 +9,7 @@ import { SupplyChart } from "@/components/supply-chart"
 import { HoldersChart } from "@/components/holders-chart"
 import { ActivityChart } from "@/components/activity-chart"
 import { TopHolders } from "@/components/top-holders"
+import { RatesBanner } from "@/components/rates-banner"
 
 interface DashboardProps {
   snapshot: Array<{
@@ -72,6 +73,8 @@ export function Dashboard({
           ))}
         </TabsList>
       </Tabs>
+
+      <RatesBanner rates={rates} />
 
       <KpiCards data={snapshot} selectedToken={selectedToken} rates={rates} />
 
