@@ -1,6 +1,7 @@
 import { getLatestResults } from "@/lib/dune"
 import { DUNE_QUERIES } from "@/lib/constants"
 import { Dashboard } from "@/components/dashboard"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 // Force server-side rendering on every request (with ISR caching on fetches).
 // This prevents the page from being statically generated at build time,
@@ -107,6 +108,8 @@ function Header() {
         >
           Base
         </a>
+        <span className="text-border">|</span>
+        <ThemeToggle />
       </div>
     </div>
   )

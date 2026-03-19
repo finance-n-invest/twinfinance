@@ -10,9 +10,11 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts"
+import { useTheme } from "next-themes"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { TOKENS, TOKEN_SYMBOLS } from "@/lib/constants"
 import { formatNumber } from "@/lib/format"
+import { chartTheme } from "@/lib/chart-theme"
 
 interface ActivityRow {
   block_date: string
@@ -34,6 +36,9 @@ export function ActivityChart({
   selectedToken,
   metric,
 }: ActivityChartProps) {
+  const { resolvedTheme } = useTheme()
+  const colors = chartTheme[resolvedTheme === "dark" ? "dark" : "light"]
+
   const tokens = selectedToken ? [selectedToken] : TOKEN_SYMBOLS
   const title =
     metric === "num_transfers" ? "Daily Transfers" : "Daily Transfer Volume"
@@ -63,23 +68,23 @@ export function ActivityChart({
       <CardContent>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={chartData}>
-            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
+            <CartesianGrid strokeDasharray="3 3" stroke={colors.grid} />
             <XAxis
               dataKey="date"
               tick={{ fontSize: 11, fontFamily: "var(--font-mono)" }}
-              stroke="#666666"
+              stroke={colors.axis}
             />
             <YAxis
               tickFormatter={formatNumber}
               tick={{ fontSize: 11, fontFamily: "var(--font-mono)" }}
-              stroke="#666666"
+              stroke={colors.axis}
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: "#121212",
-                border: "1px solid rgba(255,255,255,0.08)",
+                backgroundColor: colors.tooltipBg,
+                border: colors.tooltipBorder,
                 borderRadius: "8px",
-                color: "#e5e5e5",
+                color: colors.tooltipColor,
                 fontFamily: "var(--font-mono)",
                 fontSize: "12px",
               }}

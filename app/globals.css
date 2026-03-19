@@ -105,59 +105,52 @@
 }
 
 /*
-  Twin Finance dark-only palette
-  Background:      #000000 (pure black)
-  Surface/card:    #121212
-  Border:          #1e1e1e / rgba(255,255,255,0.08)
-  Muted text:      #666666
-  Body text:       #999999
-  Bright text:     #e5e5e5
-  Foreground:      #ffffff
+  Twin Finance palette
   Accent (orange): #ff6602
-  Accent muted:    #cc5200
+  Light: bg #f2f2f2, card #ffffff, text #000000
+  Dark:  bg #000000, card #121212, text #e5e5e5
 */
 
 :root {
-  /* Twin uses dark-only — set light vars to dark values too */
   --font-sans: "LT Superior", Arial, sans-serif;
   --font-serif: "LT Superior Serif", Georgia, serif;
   --font-mono: "LT Superior Mono", ui-monospace, monospace;
 
-  --background: #000000;
-  --foreground: #e5e5e5;
-  --card: #121212;
-  --card-foreground: #e5e5e5;
-  --popover: #121212;
-  --popover-foreground: #e5e5e5;
+  /* Light theme (from twin.finance light sections) */
+  --background: #f2f2f2;
+  --foreground: #000000;
+  --card: #ffffff;
+  --card-foreground: #000000;
+  --popover: #ffffff;
+  --popover-foreground: #000000;
   --primary: #ff6602;
-  --primary-foreground: #000000;
-  --secondary: #1e1e1e;
-  --secondary-foreground: #e5e5e5;
-  --muted: #1e1e1e;
+  --primary-foreground: #ffffff;
+  --secondary: #e5e5e5;
+  --secondary-foreground: #000000;
+  --muted: #e5e5e5;
   --muted-foreground: #666666;
-  --accent: #1e1e1e;
-  --accent-foreground: #e5e5e5;
+  --accent: #e5e5e5;
+  --accent-foreground: #000000;
   --destructive: #ef4444;
-  --border: rgba(255, 255, 255, 0.08);
-  --input: rgba(255, 255, 255, 0.1);
+  --border: rgba(0, 0, 0, 0.1);
+  --input: rgba(0, 0, 0, 0.08);
   --ring: #ff6602;
   --chart-1: #ff6602;
-  --chart-2: #3b82f6;
-  --chart-3: #22c55e;
-  --chart-4: #eab308;
-  --chart-5: #ef4444;
+  --chart-2: #2563eb;
+  --chart-3: #16a34a;
+  --chart-4: #ca8a04;
+  --chart-5: #dc2626;
   --radius: 0.625rem;
-  --sidebar: #0a0a0a;
-  --sidebar-foreground: #e5e5e5;
+  --sidebar: #e5e5e5;
+  --sidebar-foreground: #000000;
   --sidebar-primary: #ff6602;
-  --sidebar-primary-foreground: #000000;
-  --sidebar-accent: #1e1e1e;
-  --sidebar-accent-foreground: #e5e5e5;
-  --sidebar-border: rgba(255, 255, 255, 0.08);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #d4d4d4;
+  --sidebar-accent-foreground: #000000;
+  --sidebar-border: rgba(0, 0, 0, 0.1);
   --sidebar-ring: #ff6602;
 }
 
-/* Dark class (same values since Twin is dark-only) */
 .dark {
   --background: #000000;
   --foreground: #e5e5e5;
