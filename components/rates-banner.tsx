@@ -1,10 +1,13 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import type { Rates } from "@/lib/rates"
 
 interface RatesBannerProps {
   rates: Rates
 }
+
+const POLL_INTERVAL = 10 * 60 * 1000 // 10 minutes
 
 function formatRate(rate: number): string {
   if (rate >= 1000) return rate.toLocaleString("en-US", { maximumFractionDigits: 0 })
@@ -12,16 +15,23 @@ function formatRate(rate: number): string {
   return rate.toLocaleString("en-US", { minimumFractionDigits: 4, maximumFractionDigits: 4 })
 }
 
-function timeAgo(unix: number): string {
-  const diff = Math.floor(Date.now() / 1000) - unix
-  if (diff < 60) return "just now"
-  if (diff < 3600) return `${Math.floor(diff / 60)}m ago`
-  if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`
-  return `${Math.floor(diff / 86400)}d ago`
-}
-
-export function RatesBanner({ rates }: RatesBannerProps) {
+export function RatesBanner({ rates: initialRates }: RatesBannerProps) {
+  const [rates, setRates] = useState<Rates>(initialRates)
   const allCurrencies = ["ARS", "BRL", "COP", "MXN", "PEN"]
+
+  useEffect(() => {
+    const poll = async () => {
+      try {
+        const res = await fetch("/api/rates")
+        if (res.ok) setRates(await res.json())
+      } catch {
+        // keep current rates on error
+      }
+    }
+
+    const interval = setInterval(poll, POLL_INTERVAL)
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <div className="flex flex-wrap items-center gap-x-3 gap-y-1 rounded-md border border-border px-3 py-1.5 text-[11px]">
