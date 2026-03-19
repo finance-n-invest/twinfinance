@@ -55,6 +55,7 @@ export default async function Home() {
           topHolders={data.topHolders.rows as never[]}
         />
       </div>
+      <Footer />
     </main>
   )
 }
@@ -73,39 +74,43 @@ function Header() {
           </p>
         </div>
       </div>
-      <div className="flex items-center gap-4 text-xs text-muted-foreground">
+      <ThemeToggle />
+    </div>
+  )
+}
+
+function Footer() {
+  return (
+    <div className="mt-12 border-t border-border pt-6 pb-2 flex items-center justify-center gap-4 text-xs text-muted-foreground">
+      <a
+        href="https://www.twin.finance"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hover:text-foreground transition-colors"
+      >
+        twin.finance
+      </a>
+      <span className="text-border">|</span>
+      <span className="flex items-center gap-1.5">
+        Data by{" "}
         <a
-          href="https://www.twin.finance"
+          href="https://dune.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-foreground transition-colors"
+          className="text-[#ff6602] hover:underline"
         >
-          twin.finance
+          Dune
         </a>
-        <span className="text-border">|</span>
-        <span className="flex items-center gap-1.5">
-          Data by{" "}
-          <a
-            href="https://dune.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[#ff6602] hover:underline"
-          >
-            Dune
-          </a>
-        </span>
-        <span className="text-border">|</span>
-        <a
-          href="https://base.org"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-foreground transition-colors"
-        >
-          Base
-        </a>
-        <span className="text-border">|</span>
-        <ThemeToggle />
-      </div>
+      </span>
+      <span className="text-border">|</span>
+      <a
+        href="https://base.org"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hover:text-foreground transition-colors"
+      >
+        Base
+      </a>
     </div>
   )
 }
