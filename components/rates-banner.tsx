@@ -43,14 +43,6 @@ export function RatesBanner({ rates }: RatesBannerProps) {
           )
         })}
       </span>
-      <a
-        href="https://criptoya.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="ml-auto text-muted-foreground hover:text-foreground transition-colors"
-      >
-        via CriptoYa
-      </a>
     </div>
   )
 }
