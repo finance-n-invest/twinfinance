@@ -24,31 +24,24 @@ export function RatesBanner({ rates }: RatesBannerProps) {
   const allCurrencies = ["ARS", "BRL", "COP", "MXN", "PEN"]
 
   return (
-    <div className="flex flex-wrap items-center gap-x-5 gap-y-2 rounded-lg border border-border bg-card px-4 py-3">
-      <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 rounded-md border border-border px-3 py-1.5 text-[11px]">
+      <span className="font-medium text-muted-foreground uppercase tracking-wide">
         Rates
       </span>
       {allCurrencies.map((currency) => {
         const entry = rates[currency]
         const hasRate = entry?.rate != null
         return (
-          <div key={currency} className="flex items-center gap-2">
-            <span className={`font-mono text-sm ${hasRate ? "text-foreground" : "text-muted-foreground"}`}>
-              1 USDT = {hasRate ? formatRate(entry.rate!) : "—"} {currency}
-            </span>
-            {hasRate && entry.time && (
-              <span className="text-[10px] text-muted-foreground">
-                {timeAgo(entry.time)}
-              </span>
-            )}
-          </div>
+          <span key={currency} className={`font-mono ${hasRate ? "text-foreground" : "text-muted-foreground"}`}>
+            {hasRate ? formatRate(entry.rate!) : "—"} {currency}
+          </span>
         )
       })}
       <a
         href="https://criptoya.com"
         target="_blank"
         rel="noopener noreferrer"
-        className="ml-auto text-[10px] text-muted-foreground hover:text-foreground transition-colors"
+        className="ml-auto text-muted-foreground hover:text-foreground transition-colors"
       >
         via CriptoYa
       </a>
