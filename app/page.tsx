@@ -114,6 +114,18 @@ function Footer() {
       >
         Base
       </a>
+      <span className="text-border">|</span>
+      <span className="flex items-center gap-1.5">
+        Rates by{" "}
+        <a
+          href="https://criptoya.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[#ff6602] hover:underline"
+        >
+          CriptoYa
+        </a>
+      </span>
     </div>
   )
 }
