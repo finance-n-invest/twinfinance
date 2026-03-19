@@ -39,10 +39,23 @@ export const TOKENS = {
     color: "#ef4444", // red
     flag: "🇵🇪",
   },
+  MEXt: {
+    symbol: "MEXt",
+    name: "Mexican Peso",
+    currency: "MXN",
+    contract: "0x59863989d080b22476db95656d0c3cc18be92214",
+    color: "#f97316", // orange
+    flag: "🇲🇽",
+  },
 } as const
 
 export type TokenSymbol = keyof typeof TOKENS
 
 export const TOKEN_SYMBOLS = Object.keys(TOKENS) as TokenSymbol[]
+
+/** All Base chain token contract addresses (lowercase) for Dune SQL IN clauses */
+export const BASE_TOKEN_CONTRACTS = Object.values(TOKENS).map(
+  (t) => t.contract
+)
 
 export const BASESCAN_ADDRESS_URL = "https://basescan.org/address"

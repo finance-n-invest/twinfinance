@@ -33,7 +33,9 @@ export default async function Home() {
             Make sure <code className="bg-muted px-1.5 py-0.5 rounded text-xs">DUNE_API_KEY</code> is set and the queries have been
             executed at least once.
           </p>
-          <p className="text-xs text-destructive mt-4 font-mono">{message}</p>
+          {process.env.NODE_ENV === "development" && (
+            <p className="text-xs text-destructive mt-4 font-mono">{message}</p>
+          )}
         </div>
       </main>
     )
