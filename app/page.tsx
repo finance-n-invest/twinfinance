@@ -2,6 +2,11 @@ import { getLatestResults } from "@/lib/dune"
 import { DUNE_QUERIES } from "@/lib/constants"
 import { Dashboard } from "@/components/dashboard"
 
+// Force server-side rendering on every request (with ISR caching on fetches).
+// This prevents the page from being statically generated at build time,
+// which would fail if DUNE_API_KEY isn't available during the build step.
+export const dynamic = "force-dynamic"
+
 async function fetchDuneData() {
   const [snapshot, supply, holders, activity, topHolders] = await Promise.all([
     getLatestResults(DUNE_QUERIES.CURRENT_SNAPSHOT),
@@ -17,16 +22,20 @@ export default async function Home() {
   let data
   try {
     data = await fetchDuneData()
-  } catch {
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err)
     return (
       <main className="flex-1 p-6 md:p-10">
         <Header />
-        <div className="mt-8 text-center text-muted-foreground">
+        <div className="mt-8 text-center text-muted-foreground space-y-2">
           <p>Failed to load data from Dune Analytics.</p>
-          <p className="text-sm mt-2">
-            Make sure <code>DUNE_API_KEY</code> is set and the queries have been
+          <p className="text-sm">
+            Make sure <code className="bg-muted px-1.5 py-0.5 rounded text-xs">DUNE_API_KEY</code> is set and the queries have been
             executed at least once.
           </p>
+          {process.env.NODE_ENV === "development" && (
+            <p className="text-xs text-destructive mt-4 font-mono">{message}</p>
+          )}
         </div>
       </main>
     )
