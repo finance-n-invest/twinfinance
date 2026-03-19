@@ -25,10 +25,10 @@ async function executeQuery(queryId: number): Promise<string> {
 }
 
 export async function GET(request: Request) {
-  // Verify this is called by Vercel Cron (or allow in development)
+  // Verify this is called by Vercel Cron — reject if CRON_SECRET is not set or doesn't match
   const authHeader = request.headers.get("authorization")
   const cronSecret = process.env.CRON_SECRET
-  if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
+  if (!cronSecret || authHeader !== `Bearer ${cronSecret}`) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
 
