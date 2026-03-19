@@ -84,7 +84,7 @@ function Header() {
 
 function Footer() {
   return (
-    <div className="mt-12 border-t border-border pt-6 pb-2 flex items-center justify-center gap-4 text-xs text-muted-foreground">
+    <div className="mt-12 border-t border-border pt-6 pb-2 flex flex-col items-center gap-2 text-xs text-muted-foreground">
       <a
         href="https://www.twin.finance"
         target="_blank"
@@ -93,39 +93,40 @@ function Footer() {
       >
         twin.finance
       </a>
-      <span className="text-border">|</span>
-      <span className="flex items-center gap-1.5">
-        Data by{" "}
+      <div className="flex items-center gap-4">
+        <span className="flex items-center gap-1.5">
+          Data by{" "}
+          <a
+            href="https://dune.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#ff6602] hover:underline"
+          >
+            Dune
+          </a>
+        </span>
+        <span className="text-border">|</span>
+        <span className="flex items-center gap-1.5">
+          Rates by{" "}
+          <a
+            href="https://criptoya.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#ff6602] hover:underline"
+          >
+            CriptoYa
+          </a>
+        </span>
+        <span className="text-border">|</span>
         <a
-          href="https://dune.com"
+          href="https://base.org"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[#ff6602] hover:underline"
+          className="hover:text-foreground transition-colors"
         >
-          Dune
+          Base
         </a>
-      </span>
-      <span className="text-border">|</span>
-      <a
-        href="https://base.org"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="hover:text-foreground transition-colors"
-      >
-        Base
-      </a>
-      <span className="text-border">|</span>
-      <span className="flex items-center gap-1.5">
-        Rates by{" "}
-        <a
-          href="https://criptoya.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-[#ff6602] hover:underline"
-        >
-          CriptoYa
-        </a>
-      </span>
+      </div>
     </div>
   )
 }
