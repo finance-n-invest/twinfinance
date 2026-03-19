@@ -3,9 +3,12 @@ import { ThemeProvider } from "next-themes"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Twin Finance - Token Adoption Dashboard",
+  title: "Twin Stablecoins - Adoption Dashboard",
   description:
     "Track adoption metrics for Twin Finance LATAM stablecoins: ARGt, BRAt, COLt, PERt, MEXt on Base",
+  icons: {
+    icon: "/favicon.svg",
+  },
 }
 
 export default function RootLayout({
