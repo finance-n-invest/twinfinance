@@ -5,7 +5,7 @@ import "./globals.css"
 export const metadata: Metadata = {
   title: "Twin Stablecoins - Adoption Dashboard",
   description:
-    "Track adoption metrics for Twin Finance LATAM stablecoins: ARGt, BRAt, COLt, PERt, MEXt on Base",
+    "Track adoption metrics for Twin LATAM stablecoins: ARGt, BRAt, COLt, PERt on Base",
   icons: {
     icon: [
       { url: "/favicon.png", type: "image/png", sizes: "256x256" },

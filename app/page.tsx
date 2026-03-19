@@ -70,7 +70,7 @@ function Header() {
         <TwinLogo size={52} />
         <div>
           <h1 className="font-serif text-xl font-medium tracking-tight text-foreground">
-            Twin Finance
+            Twin
           </h1>
           <p className="text-muted-foreground text-xs tracking-wide uppercase">
             Stablecoin Adoption Dashboard

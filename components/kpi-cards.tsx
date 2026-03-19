@@ -25,6 +25,11 @@ function getCurrency(symbol: string): string {
   return TOKENS[symbol as keyof typeof TOKENS]?.currency ?? ""
 }
 
+/** Use the token symbol as the display label (e.g. "ARGt" not "ARS") */
+function getLabel(symbol: string): string {
+  return symbol
+}
+
 export function KpiCards({ data, selectedToken, rates }: KpiCardsProps) {
   const visibleSymbols = TOKEN_SYMBOLS as readonly string[]
   const filtered = selectedToken
@@ -46,11 +51,11 @@ export function KpiCards({ data, selectedToken, rates }: KpiCardsProps) {
     const supply = filtered.reduce((s, r) => s + r.total_supply, 0)
     const volume = filtered.reduce((s, r) => s + r.total_volume, 0)
 
-    supplyDisplay = formatWithCurrency(supply, currency)
+    supplyDisplay = formatWithCurrency(supply, getLabel(selectedToken))
     const supplyUsd = toUsd(supply, currency, rates)
     if (supplyUsd != null) supplySubtext = `~ ${formatUsd(supplyUsd)}`
 
-    volumeDisplay = formatWithCurrency(volume, currency)
+    volumeDisplay = formatWithCurrency(volume, getLabel(selectedToken))
     const volumeUsd = toUsd(volume, currency, rates)
     if (volumeUsd != null) volumeSubtext = `~ ${formatUsd(volumeUsd)}`
   } else {

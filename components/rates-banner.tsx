@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { TOKEN_SYMBOLS, TOKENS } from "@/lib/constants"
 import type { Rates } from "@/lib/rates"
 
 interface RatesBannerProps {
@@ -17,7 +18,6 @@ function formatRate(rate: number): string {
 
 export function RatesBanner({ rates: initialRates }: RatesBannerProps) {
   const [rates, setRates] = useState<Rates>(initialRates)
-  const allCurrencies = ["ARS", "BRL", "COP", "PEN"]
 
   useEffect(() => {
     const poll = async () => {
@@ -40,14 +40,15 @@ export function RatesBanner({ rates: initialRates }: RatesBannerProps) {
       </span>
       <span className="font-mono text-foreground">
         1 USDT
-        {allCurrencies.map((currency) => {
+        {TOKEN_SYMBOLS.map((sym) => {
+          const currency = TOKENS[sym].currency
           const entry = rates[currency]
           const hasRate = entry?.rate != null
           return (
-            <span key={currency}>
+            <span key={sym}>
               {" = "}
               <span className={hasRate ? "text-foreground" : "text-muted-foreground"}>
-                {hasRate ? formatRate(entry.rate!) : "—"} {currency}
+                {hasRate ? formatRate(entry.rate!) : "—"} {sym}
               </span>
             </span>
           )

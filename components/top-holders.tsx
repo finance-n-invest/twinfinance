@@ -83,7 +83,7 @@ export function TopHolders({ data, selectedToken, rates }: TopHoldersProps) {
                     </a>
                   </TableCell>
                   <TableCell className="text-right font-mono">
-                    {formatWithCurrency(row.balance, currency)}
+                    {formatWithCurrency(row.balance, row.symbol)}
                   </TableCell>
                   <TableCell className="text-right font-mono text-muted-foreground">
                     {usd != null ? formatUsd(usd) : "\u2014"}

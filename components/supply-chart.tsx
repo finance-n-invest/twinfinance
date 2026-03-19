@@ -63,8 +63,8 @@ export function SupplyChart({ data, selectedToken, rates }: SupplyChartProps) {
     const num = Number(value)
     const token = TOKENS[name as keyof typeof TOKENS]
     if (!token) return [formatNumber(num), name]
-    const label = `${name} (${token.currency})`
-    const formatted = formatWithCurrency(num, token.currency)
+    const label = name
+    const formatted = formatWithCurrency(num, name)
     const usd = toUsd(num, token.currency, rates)
     const display = usd != null ? `${formatted} (${formatUsd(usd)})` : formatted
     return [display, label]
@@ -107,10 +107,7 @@ export function SupplyChart({ data, selectedToken, rates }: SupplyChartProps) {
             />
             <Legend
               wrapperStyle={{ fontSize: "12px" }}
-              formatter={(value) => {
-                const token = TOKENS[value as keyof typeof TOKENS]
-                return token ? `${value} (${token.currency})` : value
-              }}
+              formatter={(value) => value}
             />
             {tokens.map((sym) => (
               <Area

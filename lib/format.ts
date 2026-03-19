@@ -10,13 +10,13 @@ export function formatWithCurrency(n: number, currency: string): string {
   return `${formatNumber(n)} ${currency}`
 }
 
-/** Format as USDT equivalent: "USDT 10.5M", "USDT 340K" */
+/** Format as USDT equivalent: "10.5M USDT", "340K USDT" */
 export function formatUsd(n: number): string {
-  if (n >= 1_000_000_000) return `USDT ${(n / 1_000_000_000).toFixed(1)}B`
-  if (n >= 1_000_000) return `USDT ${(n / 1_000_000).toFixed(1)}M`
-  if (n >= 1_000) return `USDT ${(n / 1_000).toFixed(1)}K`
-  if (n >= 1) return `USDT ${n.toFixed(0)}`
-  return `USDT ${n.toFixed(2)}`
+  if (n >= 1_000_000_000) return `${(n / 1_000_000_000).toFixed(1)}B USDT`
+  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M USDT`
+  if (n >= 1_000) return `${(n / 1_000).toFixed(1)}K USDT`
+  if (n >= 1) return `${n.toFixed(0)} USDT`
+  return `${n.toFixed(2)} USDT`
 }
 
 /** Format date string "2026-03-19" → "Mar 19" */

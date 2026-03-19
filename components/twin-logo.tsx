@@ -18,7 +18,7 @@ export function TwinLogo({ size = 24 }: { size?: number }) {
   return (
     <Image
       src={src}
-      alt="Twin Finance"
+      alt="Twin"
       width={size}
       height={size}
       className="shrink-0"
