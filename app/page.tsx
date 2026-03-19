@@ -117,15 +117,6 @@ function Footer() {
             CriptoYa
           </a>
         </span>
-        <span className="text-border">|</span>
-        <a
-          href="https://base.org"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-foreground transition-colors"
-        >
-          Base
-        </a>
       </div>
     </div>
   )
