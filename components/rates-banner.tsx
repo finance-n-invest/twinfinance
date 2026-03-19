@@ -21,29 +21,29 @@ function timeAgo(unix: number): string {
 }
 
 export function RatesBanner({ rates }: RatesBannerProps) {
-  const entries = Object.entries(rates).filter(
-    ([, entry]) => entry.rate != null
-  )
-
-  if (entries.length === 0) return null
+  const allCurrencies = ["ARS", "BRL", "COP", "MXN", "PEN"]
 
   return (
     <div className="flex flex-wrap items-center gap-x-5 gap-y-2 rounded-lg border border-border bg-card px-4 py-3">
       <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-        Belo Rates
+        Rates
       </span>
-      {entries.map(([currency, entry]) => (
-        <div key={currency} className="flex items-center gap-2">
-          <span className="font-mono text-sm text-foreground">
-            1 USDT = {formatRate(entry.rate!)} {currency}
-          </span>
-          {entry.time && (
-            <span className="text-[10px] text-muted-foreground">
-              {timeAgo(entry.time)}
+      {allCurrencies.map((currency) => {
+        const entry = rates[currency]
+        const hasRate = entry?.rate != null
+        return (
+          <div key={currency} className="flex items-center gap-2">
+            <span className={`font-mono text-sm ${hasRate ? "text-foreground" : "text-muted-foreground"}`}>
+              1 USDT = {hasRate ? formatRate(entry.rate!) : "—"} {currency}
             </span>
-          )}
-        </div>
-      ))}
+            {hasRate && entry.time && (
+              <span className="text-[10px] text-muted-foreground">
+                {timeAgo(entry.time)}
+              </span>
+            )}
+          </div>
+        )
+      })}
       <a
         href="https://criptoya.com"
         target="_blank"
