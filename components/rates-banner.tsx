@@ -26,14 +26,14 @@ export function RatesBanner({ rates }: RatesBannerProps) {
   return (
     <div className="flex flex-wrap items-center gap-x-3 gap-y-1 rounded-md border border-border px-3 py-1.5 text-[11px]">
       <span className="font-medium text-muted-foreground uppercase tracking-wide">
-        Rates
+        Belo Rates
       </span>
       {allCurrencies.map((currency) => {
         const entry = rates[currency]
         const hasRate = entry?.rate != null
         return (
           <span key={currency} className={`font-mono ${hasRate ? "text-foreground" : "text-muted-foreground"}`}>
-            {hasRate ? formatRate(entry.rate!) : "—"} {currency}
+            1 USD = {hasRate ? formatRate(entry.rate!) : "—"} {currency}
           </span>
         )
       })}
