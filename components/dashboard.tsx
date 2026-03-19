@@ -67,7 +67,7 @@ export function Dashboard({
             All Tokens
           </TabsTrigger>
           {TOKEN_SYMBOLS.map((sym) => (
-            <TabsTrigger key={sym} value={sym} className="text-sm tracking-wide" title={`${sym} — ${TOKENS[sym].name}`}>
+            <TabsTrigger key={sym} value={sym} className="text-lg" title={`${sym} — ${TOKENS[sym].name}`}>
               {TOKENS[sym].flag}
             </TabsTrigger>
           ))}
