@@ -19,6 +19,12 @@ export function formatUsd(n: number): string {
   return `USDT ${n.toFixed(2)}`
 }
 
+/** Format date string "2026-03-19" → "Mar 19" */
+export function formatShortDate(dateStr: string): string {
+  const d = new Date(dateStr + "T00:00:00")
+  return d.toLocaleDateString("en-US", { month: "short", day: "numeric" })
+}
+
 export function truncateAddress(addr: string): string {
   if (!addr || addr.length < 10) return addr
   return `${addr.slice(0, 6)}...${addr.slice(-4)}`

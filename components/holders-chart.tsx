@@ -13,6 +13,7 @@ import {
 import { useTheme } from "next-themes"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { TOKENS, TOKEN_SYMBOLS } from "@/lib/constants"
+import { formatShortDate } from "@/lib/format"
 import { chartTheme } from "@/lib/chart-theme"
 
 interface HoldersRow {
@@ -65,7 +66,12 @@ export function HoldersChart({ data, selectedToken }: HoldersChartProps) {
             <CartesianGrid strokeDasharray="3 3" stroke={colors.grid} />
             <XAxis
               dataKey="date"
-              tick={{ fontSize: 11, fontFamily: "var(--font-mono)" }}
+              tickFormatter={formatShortDate}
+              angle={-45}
+              textAnchor="end"
+              height={60}
+              interval="preserveStartEnd"
+              tick={{ fontSize: 10, fontFamily: "var(--font-mono)" }}
               stroke={colors.axis}
             />
             <YAxis
