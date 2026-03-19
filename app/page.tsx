@@ -31,12 +31,9 @@ export default async function Home() {
     return (
       <main className="flex-1 p-6 md:p-10">
         <Header />
-        <div className="mt-8 text-center text-muted-foreground space-y-2">
-          <p>Failed to load data from Dune Analytics.</p>
-          <p className="text-sm">
-            Make sure <code className="bg-muted px-1.5 py-0.5 rounded text-xs">DUNE_API_KEY</code> is set and the queries have been
-            executed at least once.
-          </p>
+        <div className="mt-20 text-center text-muted-foreground space-y-3">
+          <p className="text-lg">Data is temporarily unavailable</p>
+          <p className="text-sm">Please try again in a few minutes.</p>
           {process.env.NODE_ENV === "development" && (
             <p className="text-xs text-destructive mt-4 font-mono">{message}</p>
           )}
