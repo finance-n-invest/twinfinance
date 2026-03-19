@@ -39,7 +39,7 @@ export function RatesBanner({ rates: initialRates }: RatesBannerProps) {
         Rates
       </span>
       <span className="font-mono text-foreground">
-        1 USD
+        1 USDT
         {allCurrencies.map((currency) => {
           const entry = rates[currency]
           const hasRate = entry?.rate != null

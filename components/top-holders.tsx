@@ -48,7 +48,7 @@ export function TopHolders({ data, selectedToken, rates }: TopHoldersProps) {
               {!selectedToken && <TableHead className="text-xs uppercase tracking-wide">Token</TableHead>}
               <TableHead className="text-xs uppercase tracking-wide">Address</TableHead>
               <TableHead className="text-right text-xs uppercase tracking-wide">Balance</TableHead>
-              <TableHead className="text-right text-xs uppercase tracking-wide">USD</TableHead>
+              <TableHead className="text-right text-xs uppercase tracking-wide">USDT</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
