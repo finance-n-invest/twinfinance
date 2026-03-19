@@ -16,7 +16,10 @@ export async function getLatestResults<T = Record<string, unknown>>(
 ): Promise<{ rows: T[] }> {
   const res = await fetch(`${BASE}/query/${queryId}/results`, {
     headers: headers(),
-    next: { revalidate: 3600 },
+    // no-store avoids the Next.js Data Cache (which persists across deploys
+    // on Vercel and could serve a stale error response).  The Dune API itself
+    // returns cached query results, so we're not hammering the database.
+    cache: "no-store",
   })
   if (!res.ok) {
     const body = await res.text().catch(() => "")
