@@ -16,10 +16,9 @@ export async function getLatestResults<T = Record<string, unknown>>(
 ): Promise<{ rows: T[] }> {
   const res = await fetch(`${BASE}/query/${queryId}/results`, {
     headers: headers(),
-    // no-store avoids the Next.js Data Cache (which persists across deploys
-    // on Vercel and could serve a stale error response).  The Dune API itself
-    // returns cached query results, so we're not hammering the database.
-    cache: "no-store",
+    // Cache results for 10 minutes — avoids hammering Dune API when many
+    // users visit simultaneously. The cron job refreshes data daily anyway.
+    next: { revalidate: 600 },
   })
   if (!res.ok) {
     const body = await res.text().catch(() => "")
