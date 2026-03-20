@@ -34,7 +34,7 @@ export function RatesBanner({ rates: initialRates }: RatesBannerProps) {
   }, [])
 
   return (
-    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 rounded-md border border-border px-3 py-1.5 text-sm">
+    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 rounded-md border border-border px-3 py-1.5 text-xs md:text-sm">
       <span className="font-medium text-muted-foreground tracking-wide">
         Rates
       </span>
