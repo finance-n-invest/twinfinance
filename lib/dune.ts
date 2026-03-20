@@ -16,9 +16,8 @@ export async function getLatestResults<T = Record<string, unknown>>(
 ): Promise<{ rows: T[] }> {
   const res = await fetch(`${BASE}/query/${queryId}/results`, {
     headers: headers(),
-    // Cache results for 10 minutes — avoids hammering Dune API when many
-    // users visit simultaneously. The cron job refreshes data daily anyway.
-    next: { revalidate: 600 },
+    // Cache results for 4 hours — data refreshes daily via cron anyway.
+    next: { revalidate: 14400 },
   })
   if (!res.ok) {
     const body = await res.text().catch(() => "")
